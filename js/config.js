@@ -5,7 +5,7 @@
  * or update the matching paths in index.html and this list together.
  */
 window.GESELL_CONFIG = {
-  slideDurationMs: 6500,
+  slideDurationMs: 3500,
   slides: [
     {
       src: "assets/images/slide-1.jpg",
