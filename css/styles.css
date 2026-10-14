@@ -1,0 +1,164 @@
+@property --title-start {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #f4e6cf;
+}
+@property --title-mid {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #d2c7b7;
+}
+@property --title-end {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #7c9a9a;
+}
+
+:root {
+  color-scheme: dark;
+  --page-black: #080808;
+  --hero-height: 100svh;
+  --fade-duration: 1400ms;
+  --title-start: #f4e6cf;
+  --title-mid: #d2c7b7;
+  --title-end: #7c9a9a;
+  --title-size: clamp(4.2rem, 18vw, 19rem);
+}
+
+* { box-sizing: border-box; }
+html { background: var(--page-black); scroll-behavior: smooth; }
+body { margin: 0; background: var(--page-black); color: #fff; font-family: Arial, Helvetica, sans-serif; }
+button { font: inherit; }
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: var(--hero-height);
+  min-height: 460px;
+  overflow: hidden;
+  isolation: isolate;
+  background: #111;
+}
+
+.hero__slides,
+.hero__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.hero__image {
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  transform: scale(1.015);
+  transition: opacity var(--fade-duration) ease-in-out, transform 7s ease-out;
+  will-change: opacity;
+}
+.hero__image.is-active { opacity: 1; transform: scale(1); }
+
+/* A soft, local shadow gives the letters contrast without a banner or full-image overlay. */
+.hero__title-wrap {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 4vw;
+  pointer-events: none;
+}
+.hero__title {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-family: "Arial Black", Impact, Haettenschweiler, sans-serif;
+  font-size: var(--title-size);
+  font-weight: 900;
+  letter-spacing: -0.085em;
+  line-height: 0.8;
+  text-align: center;
+  white-space: nowrap;
+  color: transparent;
+  background-image: linear-gradient(112deg, var(--title-start) 0%, var(--title-mid) 46%, var(--title-end) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  filter: drop-shadow(0 2px 2px rgb(0 0 0 / 55%)) drop-shadow(0 0 12px rgb(0 0 0 / 30%));
+  transition: --title-start 1400ms ease, --title-mid 1400ms ease, --title-end 1400ms ease;
+  isolation: isolate;
+}
+.hero__title::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -0.13em -0.10em -0.10em -0.06em;
+  border-radius: 0.02em;
+  background: rgb(0 0 0 / 15%);
+  filter: blur(17px);
+}
+
+.hero__controls {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: clamp(22px, 4vh, 44px);
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  transform: translateX(-50%);
+  padding: 9px 13px;
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 999px;
+  background: rgb(0 0 0 / 20%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.hero__arrow {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  color: white;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1.25rem;
+  opacity: 0.85;
+}
+.hero__arrow:hover { opacity: 1; }
+.hero__pagination { display: flex; align-items: center; gap: 9px; }
+.hero__dot {
+  width: 6px;
+  height: 6px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 48%);
+  cursor: pointer;
+  transition: transform 250ms ease, background-color 250ms ease;
+}
+.hero__dot.is-active { background: #fff; transform: scale(1.45); }
+.hero__arrow:focus-visible, .hero__dot:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+
+.map-section { width: 100%; background: #101010; }
+.map-section__frame {
+  display: block;
+  width: 100%;
+  height: clamp(620px, 88svh, 1000px);
+  border: 0;
+  background: #e7e7e7;
+}
+
+@media (max-width: 700px) {
+  :root { --title-size: clamp(3.5rem, 18.5vw, 8.5rem); }
+  .hero { min-height: 420px; }
+  .hero__image { object-position: center; }
+  .hero__controls { bottom: 20px; gap: 17px; }
+  .map-section__frame { height: 72svh; min-height: 520px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero__image, .hero__dot, .hero__title { transition: none; }
+  .hero__image.is-active { transform: none; }
+}

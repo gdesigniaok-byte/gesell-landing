@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080808">
+  <meta name="description" content="GESELL — Villa Gesell, Argentina.">
+  <title>GESELL</title>
+  <link rel="preload" as="image" href="assets/images/slide-1.jpg" fetchpriority="high">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/config.js" defer></script>
+  <script src="js/slideshow.js" defer></script>
+</head>
+<body>
+  <main>
+    <section class="hero" aria-label="GESELL image slideshow">
+      <div class="hero__slides" aria-hidden="true">
+        <img class="hero__image is-active" src="assets/images/slide-1.jpg" alt="" fetchpriority="high">
+        <img class="hero__image" src="assets/images/slide-2.jpg" alt="" loading="eager">
+        <img class="hero__image" src="assets/images/slide-3.jpg" alt="" loading="eager">
+      </div>
+
+      <div class="hero__title-wrap">
+        <h1 class="hero__title" id="hero-title">GESELL</h1>
+      </div>
+
+      <div class="hero__controls" aria-label="Slideshow controls">
+        <button class="hero__arrow" id="previous-slide" type="button" aria-label="Previous image">←</button>
+        <div class="hero__pagination" role="group" aria-label="Choose an image">
+          <button class="hero__dot is-active" type="button" aria-label="Show image 1" aria-pressed="true" data-slide="0"></button>
+          <button class="hero__dot" type="button" aria-label="Show image 2" aria-pressed="false" data-slide="1"></button>
+          <button class="hero__dot" type="button" aria-label="Show image 3" aria-pressed="false" data-slide="2"></button>
+        </div>
+        <button class="hero__arrow" id="next-slide" type="button" aria-label="Next image">→</button>
+      </div>
+    </section>
+
+    <section class="map-section" aria-label="Interactive map of Villa Gesell">
+      <iframe
+        class="map-section__frame"
+        id="gesell-map"
+        title="Interactive Villa Gesell map"
+        src="https://umap.openstreetmap.fr/en/map/villa-gesell_1470956#15"
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen>
+      </iframe>
+    </section>
+  </main>
+</body>
+</html>
